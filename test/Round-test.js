@@ -3,7 +3,6 @@ const expect = chai.expect;
 
 const Round = require('../src/Round');
 const Deck = require('../src/Deck');
-//const Turn = require('../src/Turn');
 const Card = require('../src/Card');
 
 describe('Round', () => {
@@ -42,7 +41,7 @@ describe('Round', () => {
   describe('returnCurrentCard(), takeTurn()', () => {
 
     it('should return the current card', () => {
-      currentCard = round.returnCurrentCard();
+      const currentCard = round.returnCurrentCard();
 
       expect(currentCard).to.be.deep.equal(card1);
     })
