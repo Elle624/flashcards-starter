@@ -6,11 +6,8 @@ const Deck = require('../src/Deck');
 const Card = require('../src/Card');
 
 describe('Round', () => {
-  let card1;
-  let card2;
-  let card3;
-  let deck;
-  let round;
+  let card1, card2, card3, deck, round;
+  
   beforeEach( () => {
     card1 = new Card(1, "what is the biggest dolphin?", ['spinner', 'bottlenose', 'orca'], 'orca');
     card2 = new Card(2, "is octopus smart?", ['yes', 'no', 'maybe'], 'yes');
@@ -96,6 +93,7 @@ describe('Round', () => {
     it('ends a round and log the sentence', () => {
       round.takeTurn('orca');
       const ending = round.endRound();
+
       expect(ending).to.be.equal('** Round over! ** You answered 100% of the questions correctly!');
     })
 

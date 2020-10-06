@@ -47,6 +47,7 @@ describe('Turn', () => {
     it('should return true if guess match the correct answer', () => {
       const firstTurn = new Turn('orca', currentCard);
       const answer1 = firstTurn.evaluateGuess();
+      
       expect(answer1).to.be.equal(true);
     })
 
