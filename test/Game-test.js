@@ -1,16 +1,21 @@
 const chai = require('chai');
 const expect = chai.expect;
-// const data = require('./data');
-// const prototypeQuestions = data.prototypeData;
 const Round = require('../src/Round');
-// const Deck = require('../src/Deck');
-// const Card = require('../src/Card');
 const Game = require('../src/Game');
 
 describe('Game', () => {
+
   let game;
   beforeEach( () => {
     game = new Game();
+  })
+
+  it('should be a function', () => {
+    expect(Game).to.be.a('function');
+  })
+
+  it('should be an instance of Game', () => {
+    expect(game).to.be.an.instanceof(Game);
   })
 
   it('current round should be default to undefined before starting a game', () => {
@@ -47,7 +52,7 @@ describe('Game', () => {
   it('should have a deck after game started', () => {
     game.start();
     const gameDeck = !game.deck;
-    
+
     expect(gameDeck).to.equal(false);
   })
 
