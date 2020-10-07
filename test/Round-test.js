@@ -22,6 +22,12 @@ describe('Round', () => {
       expect(Round).to.be.a('function');
     })
 
+    it('should be an instance of Round', () => {
+      const round = new Round();
+      
+      expect(round).to.be.an.instanceof(Round);
+    });
+
     it('should store cards in a deck', () => {
       expect(round.deck).to.be.deep.equal([card1, card2, card3]);
     })
@@ -65,7 +71,7 @@ describe('Round', () => {
       expect(round.returnCurrentCard()).to.be.deep.equal(card3);
     })
   })
-  describe('calculatePercentCorrect(), endRound()', () => {
+  describe('calculatePercentCorrect()', () => {
     
     it('should return 100 percent of correct guessing if first guess is correct', () => {
       round.takeTurn('orca');
@@ -88,22 +94,6 @@ describe('Round', () => {
       const percentCorrect = round.calculatePercentCorrect();
 
       expect(percentCorrect).to.be.equal(67);
-    })
-    
-    it('ends a round and log the sentence', () => {
-      round.takeTurn('orca');
-      const ending = round.endRound();
-
-      expect(ending).to.be.equal('** Round over! ** You answered 100% of the questions correctly!');
-    })
-
-    it('can also log different percentage', () => {
-      round.takeTurn(5);
-      round.takeTurn('yes');
-      round.takeTurn('white');
-      const ending = round.endRound();
-
-      expect(ending).to.be.equal('** Round over! ** You answered 67% of the questions correctly!'); 
     })
   })
 })
