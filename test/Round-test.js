@@ -28,16 +28,22 @@ describe('Round', () => {
       expect(round).to.be.an.instanceof(Round);
     });
 
-    it('should store cards in a deck', () => {
-      expect(round.deck).to.be.deep.equal([card1, card2, card3]);
+    it('should start a round with a deck full of cards', () => {
+      expect(round.deck).to.deep.equal([card1, card2, card3]);
     })
 
-    it('should have a default value of 0', () => {
-      expect(round.turns).to.be.equal(0);
+    it('should start a round with a deck only store cards in', () => {
+      const round = new Round('Elle', true, 3);
+
+      expect(round.deck).to.deep.equal([]);
     })
 
-    it('should have a default value of an empty array', () => {
-      expect(round.incorrectGuesses).to.be.deep.equal([]);
+    it('should have a default value of 0 in the beginning of a round', () => {
+      expect(round.turns).to.equal(0);
+    })
+
+    it('should have a default value of an empty array in the beginning of a round', () => {
+      expect(round.incorrectGuesses).to.deep.equal([]);
     })
   })
 
@@ -46,29 +52,41 @@ describe('Round', () => {
     it('should return the current card', () => {
       const currentCard = round.returnCurrentCard();
 
-      expect(currentCard).to.be.deep.equal(card1);
+      expect(currentCard).to.deep.equal(card1);
     })
 
-    it('should update turns count, evaluates guesses, gives feedback if guess is correct', () => {
+    it('should update turns count', () => {
+      const result1 = round.takeTurn('');
+      const result2 = round.takeTurn('yes')
+
+      expect(round.turns).to.equal(2);
+    })
+
+    it('should gives feedback if guess is correct', () => {
       const result = round.takeTurn('orca');
 
-      expect(round.turns).to.be.equal(1);
-      expect(round.incorrectGuesses).to.be.deep.equal([]);
-      expect(result).to.be.equal('correct!');  
+      expect(result).to.equal('correct!');  
     })
 
-    it('if guess wrong, it should update turns count, evaluates guesses, gives feedback, and stores ids of incorrect guesses', () => {
-      const result = round.takeTurn('spinner');
+    it('should gives feedback if guess is wrong', () => {
+      const result = round.takeTurn('not sure');
 
-      expect(round.turns).to.be.equal(1);
-      expect(round.incorrectGuesses).to.be.deep.equal([1]);
-      expect(result).to.be.equal('incorrect!');  
+      expect(result).to.equal('incorrect!');  
     })
+
+    it('if guess wrong, it should evaluates guesses, and stores ids of incorrect guesses', () => {
+      round.takeTurn('spinner');
+      const wrongAnswerId = round.incorrectGuesses[0];
+
+      expect(round.incorrectGuesses).to.deep.equal([1]);
+      expect(wrongAnswerId).to.equal(1);  
+    })
+
     it('should also update current card after each turn', () => {
       round.takeTurn('orca');
       round.takeTurn('maybe');
 
-      expect(round.returnCurrentCard()).to.be.deep.equal(card3);
+      expect(round.returnCurrentCard()).to.deep.equal(card3);
     })
   })
   describe('calculatePercentCorrect()', () => {
@@ -77,14 +95,14 @@ describe('Round', () => {
       round.takeTurn('orca');
       const percentCorrect = round.calculatePercentCorrect();
 
-      expect(percentCorrect).to.be.equal(100);
+      expect(percentCorrect).to.equal(100);
     })
 
     it('should return 0 percent of correct guessing if first guess is wrong', () => {
       round.takeTurn('maybe');
       const percentCorrect = round.calculatePercentCorrect();
 
-      expect(percentCorrect).to.be.equal(0);
+      expect(percentCorrect).to.equal(0);
     })
 
     it('should return percentage of correct guessing', () => {
@@ -93,7 +111,7 @@ describe('Round', () => {
       round.takeTurn('white');
       const percentCorrect = round.calculatePercentCorrect();
 
-      expect(percentCorrect).to.be.equal(67);
+      expect(percentCorrect).to.equal(67);
     })
   })
 })

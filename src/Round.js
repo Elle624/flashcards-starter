@@ -2,7 +2,7 @@ const Turn = require('../src/Turn');
 
 class Round {
   constructor(deck) {
-    this.deck = deck? deck.cards : [];
+    this.deck = typeof deck === 'object' ? deck.cards : [];
     this.turns = 0;
     this.incorrectGuesses = [];
   }
