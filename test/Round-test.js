@@ -56,8 +56,8 @@ describe('Round', () => {
     })
 
     it('should update turns count', () => {
-      const result1 = round.takeTurn('');
-      const result2 = round.takeTurn('yes')
+      round.takeTurn('');
+      round.takeTurn('yes')
 
       expect(round.turns).to.equal(2);
     })
