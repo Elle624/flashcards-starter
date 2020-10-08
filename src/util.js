@@ -37,6 +37,7 @@ async function main(round) {
 
     if(!round.returnCurrentCard()) {
       round.endRound();
+      process.exit();
     } else {
       main(round);
     }
