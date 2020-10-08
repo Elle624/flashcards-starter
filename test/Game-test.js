@@ -1,5 +1,6 @@
 const chai = require('chai');
 const expect = chai.expect;
+const Card = require('../src/Card');
 const Round = require('../src/Round');
 const Game = require('../src/Game');
 
@@ -34,8 +35,8 @@ describe('Game', () => {
 
   it('should create Cards instances after game start', () => {
     game.start();
-    const cardIsCard = game.cards.every(card => typeof card === 'object');
-
+    const cardIsCard = game.cards.every(card => card instanceof Card);
+    
     expect(cardIsCard).to.equal(true);
   })
 
@@ -51,9 +52,9 @@ describe('Game', () => {
 
   it('should have a deck after game started', () => {
     game.start();
-    const gameDeck = !game.deck;
+    const gameDeck = !!game.deck;
 
-    expect(gameDeck).to.equal(false);
+    expect(gameDeck).to.equal(true);
   })
 
 })
