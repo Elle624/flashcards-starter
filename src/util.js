@@ -11,7 +11,7 @@ const genList = (round) => {
   });
   return {
     type: 'rawlist',
-    message: card.question,
+    message: card.id + " " + card.question,
     name: 'answers',
     choices: choices
   };
@@ -37,7 +37,6 @@ async function main(round) {
 
     if(!round.returnCurrentCard()) {
       round.endRound();
-      process.exit();
     } else {
       main(round);
     }

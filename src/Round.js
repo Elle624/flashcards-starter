@@ -31,9 +31,12 @@ class Round {
   }
   endRound() {
     const stopTime = Date.now();
-    const min = Math.floor((stopTime - this.startTime) / 1000 /60);
+    const min = Math.floor((stopTime - this.startTime) / 1000 / 60);
     const sec = Math.floor((stopTime - this.startTime) / 1000 % 60);
-    console.log(`** Round over! ** You answered ${this.calculatePercentCorrect()}% of the questions correctly in ${min} min ${sec} sec!`);
+    console.log(`** Round over! ** You answered ${this.calculatePercentCorrect()}% of the questions correctly in ${min} min ${sec} sec! \n
+    Below is the index of the questions that you answered wrong: \n
+    ${this.incorrectGuesses}`);
+    process.exit();
   }
 }
 
