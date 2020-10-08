@@ -24,7 +24,7 @@ class Game {
 
   start() {
     this.cards = prototypeQuestions.map(card => {
-      return new Card(card['id'], card['question'], card['answers'], card['correctAnswer'])
+      return new Card(card.id, card.question, card.answers, card.correctAnswer)
     })
     this.deck = new Deck(this.cards);
     this.currentRound = new Round(this.deck);
