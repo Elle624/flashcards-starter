@@ -23,9 +23,8 @@ class Game {
   }
 
   start() {
-    prototypeQuestions.forEach(card => {
-      let newCard = new Card(card['id'], card['question'], card['answers'], card['correctAnswer']);
-      this.cards.push(newCard);
+    this.cards = prototypeQuestions.map(card => {
+      return new Card(card['id'], card['question'], card['answers'], card['correctAnswer'])
     })
     this.deck = new Deck(this.cards);
     this.currentRound = new Round(this.deck);
