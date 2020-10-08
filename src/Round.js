@@ -5,6 +5,7 @@ class Round {
     this.deck = typeof deck === 'object' ? deck.cards : [];
     this.turns = 0;
     this.incorrectGuesses = [];
+    this.startTime = Date.now();
   }
   returnCurrentCard() {
     return this.deck[0];
@@ -29,7 +30,10 @@ class Round {
     }
   }
   endRound() {
-    console.log(`** Round over! ** You answered ${this.calculatePercentCorrect()}% of the questions correctly!`);
+    const stopTime = Date.now();
+    const min = Math.floor((stopTime - this.startTime) / 1000 /60);
+    const sec = Math.floor((stopTime - this.startTime) / 1000 % 60);
+    console.log(`** Round over! ** You answered ${this.calculatePercentCorrect()}% of the questions correctly in ${min} min ${sec} sec!`);
   }
 }
 
